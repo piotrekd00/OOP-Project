@@ -8,7 +8,7 @@ public class Employee extends Human{
     private ArrayList<Purchase> purchaseList;
     Employee(int age, String name, String secondName, double salary) {
         super(age, name, secondName);
-        this.salary = 4000.00;
+        this.salary = salary;
         this.startDate = new Date();
         this.performanceClass = 'F';
         this.purchaseList = new ArrayList<Purchase>();
@@ -40,5 +40,13 @@ public class Employee extends Human{
 
     public void addPurchaseList(Purchase purchase) {
         this.purchaseList.add(purchase);
+    }
+
+    public double calculateSales() {
+        double totalSales = 0.0;
+        for (Purchase purchase : this.purchaseList) {
+            totalSales += purchase.getNetPrice();
+        }
+        return totalSales;
     }
 }

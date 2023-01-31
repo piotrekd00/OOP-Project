@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -32,5 +33,15 @@ public class DealerSite {
     }
     public void addVehicle(Vehicle vehicle, double price) {
         this.vehicles.put(vehicle, price);
+    }
+
+    public ArrayList<Purchase> getPurchasesInTimeRange(Date startDate, Date endDate) {
+        ArrayList<Purchase> purchasesInTimeRange = new ArrayList<>();
+        for (Purchase purchase : this.purchases) {
+            if (purchase.getDate().after(startDate) && purchase.getDate().before(endDate)) {
+                purchasesInTimeRange.add(purchase);
+            }
+        }
+        return purchasesInTimeRange;
     }
 }

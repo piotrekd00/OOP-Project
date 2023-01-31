@@ -10,6 +10,7 @@ public abstract class Vehicle {
         this.brand = brand;
         this.model = model;
         this.engineCapacity = engineCapacity;
+        this.available = true;
     }
 
     public final int getProductionYear() {
@@ -36,11 +37,8 @@ public abstract class Vehicle {
         this.productionYear = productionYear;
     }
 
-    public final void setBrand(String brand) {
+    public final void setBrandAndModel(String brand, String model) {
         this.brand = brand;
-    }
-
-    public final void setModel(String model) {
         this.model = model;
     }
 

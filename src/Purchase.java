@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Purchase {
@@ -9,6 +10,9 @@ public class Purchase {
 
     Purchase(double grossPrice, Vehicle vehicle, Employee employee, Client client){
         this.date = new Date();
+        vehicle.setAvailable(false);
+        employee.addPurchaseList(this);
+        client.addPurchaseList(this);
         this.grossPrice = grossPrice;
         this.vehicle = vehicle;
         this.seller = employee;
@@ -33,5 +37,12 @@ public class Purchase {
 
     public Vehicle getVehicle() {
         return vehicle;
+    }
+    public double getNetPrice() {
+        return grossPrice * 0.77;
+    }
+    public String humanReadableDate(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(this.date);
     }
 }

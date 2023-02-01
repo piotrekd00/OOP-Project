@@ -1,10 +1,12 @@
+package classes;
+
 import java.util.ArrayList;
 
 public class Client extends Human{
     private static int latestId = 1;
     private ArrayList<Purchase> purchaseList;
     private final int id;
-    Client(int age, String name, String secondName) {
+    public Client(int age, String name, String secondName) {
         super(age, name, secondName);
         this.purchaseList= new ArrayList<Purchase>();
         this.id = latestId;
@@ -21,6 +23,14 @@ public class Client extends Human{
 
     public void addPurchaseList(Purchase purchase) {
         this.purchaseList.add(purchase);
+    }
+
+    public double calculatePurchases() {
+        double totalPurchases = 0.0;
+        for (Purchase purchase : this.purchaseList) {
+            totalPurchases += purchase.getGrossPrice();
+        }
+        return totalPurchases;
     }
 
 }

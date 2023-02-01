@@ -1,14 +1,16 @@
+package classes;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Purchase {
+public class Purchase implements Comparable<Purchase> {
     private final Date date;
     private final double grossPrice;
     private final Vehicle vehicle;
     private final Employee seller;
     private final Client buyer;
 
-    Purchase(double grossPrice, Vehicle vehicle, Employee employee, Client client){
+    public Purchase(double grossPrice, Vehicle vehicle, Employee employee, Client client){
         this.date = new Date();
         vehicle.setAvailable(false);
         employee.addPurchaseList(this);
@@ -44,5 +46,14 @@ public class Purchase {
     public String humanReadableDate(){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(this.date);
+    }
+
+    @Override
+    public int compareTo(Purchase other) {
+        int result = Double.compare(this.getNetPrice(), other.getNetPrice());
+        if (result == 0) {
+            result = this.date.compareTo(other.date);
+        }
+        return result;
     }
 }

@@ -1,4 +1,6 @@
-import org.junit.Before;
+package tests;
+import classes.*;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -7,16 +9,16 @@ public class EmployeeTest {
 
     @Test
     public void testGettersAndSetters() {
-        assertEquals(5000.00, employee.getSalary(), 0);
-        assertEquals('F', employee.getPerformanceClass());
+        Assert.assertEquals(5000.00, employee.getSalary(), 0);
+        Assert.assertEquals('F', employee.getPerformanceClass());
         assertNotNull(employee.getStartDate());
         assertTrue(employee.getPurchaseList().isEmpty());
 
         employee.setPerformanceClass('A');
         employee.setSalary(6000.00);
 
-        assertEquals('A', employee.getPerformanceClass());
-        assertEquals(6000.00, employee.getSalary(), 0.001);
+        Assert.assertEquals('A', employee.getPerformanceClass());
+        Assert.assertEquals(6000.00, employee.getSalary(), 0.001);
     }
 
     @Test

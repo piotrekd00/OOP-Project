@@ -1,3 +1,6 @@
+package tests;
+import classes.*;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -7,10 +10,10 @@ public class VehicleTest {
 
     @Test
     public void testGettersAndSetters() {
-        assertEquals(2.0, vehicle.getEngineCapacity(), 0);
-        assertEquals(2010, vehicle.getProductionYear());
-        assertEquals("BMW", vehicle.getBrand());
-        assertEquals("E92", vehicle.getModel());
+        Assert.assertEquals(2.0, vehicle.getEngineCapacity(), 0);
+        Assert.assertEquals(2010, vehicle.getProductionYear());
+        Assert.assertEquals("BMW", vehicle.getBrand());
+        Assert.assertEquals("E92", vehicle.getModel());
         assertTrue(vehicle.isAvailable());
 
         vehicle.setAvailable(false);
@@ -18,10 +21,10 @@ public class VehicleTest {
         vehicle.setProductionYear(2009);
         vehicle.setEngineCapacity(2.4);
 
-        assertEquals(2.4, vehicle.getEngineCapacity(), 0);
-        assertEquals(2009, vehicle.getProductionYear());
-        assertEquals("Mercedes", vehicle.getBrand());
-        assertEquals("CLS", vehicle.getModel());
+        Assert.assertEquals(2.4, vehicle.getEngineCapacity(), 0);
+        Assert.assertEquals(2009, vehicle.getProductionYear());
+        Assert.assertEquals("Mercedes", vehicle.getBrand());
+        Assert.assertEquals("CLS", vehicle.getModel());
         assertFalse(vehicle.isAvailable());
     }
     @Test

@@ -1,3 +1,6 @@
+package tests;
+import classes.*;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -7,13 +10,13 @@ public class MotorcycleTest {
 
     @Test
     public void testGettersAndSetters(){
-        assertEquals(0, motorcycle.getTrunkCapacity());
+        Assert.assertEquals(0, motorcycle.getTrunkCapacity());
         assertTrue(motorcycle.isHasGlass());
 
         motorcycle.setHasGlass(false);
         motorcycle.setTrunkCapacity(5);
 
-        assertEquals(5, motorcycle.getTrunkCapacity());
+        Assert.assertEquals(5, motorcycle.getTrunkCapacity());
         assertFalse(motorcycle.isHasGlass());
     }
 }

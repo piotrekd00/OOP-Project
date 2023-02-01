@@ -1,3 +1,5 @@
+package classes;
+
 public abstract class Vehicle {
     private int productionYear;
     private String brand;
@@ -5,7 +7,7 @@ public abstract class Vehicle {
     private double engineCapacity;
     private boolean available;
 
-    Vehicle(int productionYear, String brand, String model, double engineCapacity){
+    protected Vehicle(int productionYear, String brand, String model, double engineCapacity){
         this.productionYear = productionYear;
         this.brand = brand;
         this.model = model;
@@ -48,5 +50,10 @@ public abstract class Vehicle {
 
     public final void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    @Override
+    public String toString() {
+        return this.productionYear + " " + this.brand + " " + this.model + " " + this.engineCapacity;
     }
 }

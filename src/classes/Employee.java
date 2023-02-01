@@ -1,12 +1,14 @@
+package classes;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Employee extends Human{
     private double salary;
     private char performanceClass;
-    private Date startDate;
+    private final Date startDate;
     private ArrayList<Purchase> purchaseList;
-    Employee(int age, String name, String secondName, double salary) {
+    public Employee(int age, String name, String secondName, double salary) {
         super(age, name, secondName);
         this.salary = salary;
         this.startDate = new Date();

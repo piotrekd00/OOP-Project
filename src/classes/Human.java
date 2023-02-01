@@ -1,9 +1,11 @@
+package classes;
+
 public abstract class Human {
     private int age;
     private String name;
     private String secondName;
 
-    Human(int age, String name, String secondName){
+    protected Human(int age, String name, String secondName){
         this.age = age;
         this.name = name;
         this.secondName = secondName;

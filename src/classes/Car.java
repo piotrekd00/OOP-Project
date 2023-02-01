@@ -1,10 +1,12 @@
+package classes;
+
 public class Car extends Vehicle{
     private char carClass;
     private String type;
     private int doors;
     private int seats;
 
-    Car(int productionYear, String brand, String model, double engineCapacity, char carClass, int doors, int seats, String type) {
+    public Car(int productionYear, String brand, String model, double engineCapacity, char carClass, int doors, int seats, String type) {
         super(productionYear, brand, model, engineCapacity);
         this.type = type;
         this.carClass = carClass;

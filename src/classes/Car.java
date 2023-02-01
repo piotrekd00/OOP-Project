@@ -45,4 +45,10 @@ public class Car extends Vehicle{
     public void setSeats(int seats) {
         this.seats = seats;
     }
+
+    @Override
+    public String toString() {
+        String base = super.toString();
+        return base + "L " + this.type + " " + this.doors + " doors " + this.seats + " seats";
+    }
 }

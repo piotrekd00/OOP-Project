@@ -13,7 +13,7 @@ public class Employee extends Human{
         this.salary = salary;
         this.startDate = new Date();
         this.performanceClass = 'F';
-        this.purchaseList = new ArrayList<Purchase>();
+        this.purchaseList = new ArrayList<>();
     }
 
     public ArrayList<Purchase> getPurchaseList() {
@@ -50,5 +50,9 @@ public class Employee extends Human{
             totalSales += purchase.getNetPrice();
         }
         return totalSales;
+    }
+
+    public int getNumOfSales(){
+        return this.purchaseList.size();
     }
 }

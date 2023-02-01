@@ -19,4 +19,13 @@ public class MotorcycleTest {
         Assert.assertEquals(5, motorcycle.getTrunkCapacity());
         assertFalse(motorcycle.isHasGlass());
     }
+
+    @Test
+    public void testToString(){
+        String expected = "2010 BMW R1200GS 125.0cc";
+        assertEquals(expected, motorcycle.toString());
+        motorcycle.setTrunkCapacity(10);
+        expected = "2010 BMW R1200GS 125.0cc with 10L trunk";
+        assertEquals(expected, motorcycle.toString());
+    }
 }

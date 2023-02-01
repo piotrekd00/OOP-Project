@@ -29,7 +29,7 @@ public class DealerSiteTest {
         purchase = new Purchase(20000.00, car, employee, client);
     }
     @Test
-    public void testGettersAndSetters() {
+    public void testGettersAndSetters() throws IllegalArgumentException {
         dealerSite.addEmployee(employee);
         dealerSite.addVehicle(car, 20000);
         dealerSite.addPurchase(purchase);
@@ -41,9 +41,9 @@ public class DealerSiteTest {
 
     @Test
     public void testOverload(){
-        HashMap<Vehicle, Double> vehicles = new HashMap<Vehicle, Double>();
-        HashSet<Purchase> purchases = new HashSet<Purchase>();
-        ArrayList<Employee> employees = new ArrayList<Employee>();
+        HashMap<Vehicle, Double> vehicles = new HashMap<>();
+        HashSet<Purchase> purchases = new HashSet<>();
+        ArrayList<Employee> employees = new ArrayList<>();
         vehicles.put(car, 5000.00);
         purchases.add(purchase);
         employees.add(employee);
@@ -55,6 +55,32 @@ public class DealerSiteTest {
         assertTrue(dealerSite.getPurchases().contains(purchase));
     }
     @Test
+    public void testWrongPrice() throws IllegalArgumentException {
+        boolean flag = false;
+        try{
+            dealerSite.addVehicle(car, -500);
+        }
+        catch (IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+
+    @Test
+    public void testPriceChanging() throws IllegalArgumentException {
+        dealerSite.addVehicle(car, 5000.00);
+        dealerSite.changeVehiclePrice(car, 4000);
+        assertEquals(4000, dealerSite.getVehiclePrice(car), 0);
+        boolean flag = false;
+        try{
+            dealerSite.changeVehiclePrice(car, -100);
+        }
+        catch (IllegalArgumentException e){
+            flag = true;
+        }
+        assertTrue(flag);
+    }
+    @Test
     public void testPurchasesInTimeRange() {
         Date date = new Date();
         Date date1 = new Date(date.getTime() - TimeUnit.DAYS.toMillis( 1 ));
@@ -64,7 +90,7 @@ public class DealerSiteTest {
     }
 
     @Test
-    public void testVehicleInPriceRange() {
+    public void testVehicleInPriceRange() throws IllegalArgumentException {
         dealerSite.addVehicle(car, 5000);
         dealerSite.addVehicle(motorcycle, 7000);
         assertTrue(dealerSite.getVehiclesBetweenPriceRange(4000, 6000).contains(car));
@@ -72,7 +98,7 @@ public class DealerSiteTest {
     }
 
     @Test
-    public void testVehicleCount() {
+    public void testVehicleCount() throws IllegalArgumentException {
         dealerSite.addVehicle(car, 5000);
         dealerSite.addVehicle(motorcycle, 7000);
         assertEquals(dealerSite.getVehicleCount("car"), 1);
@@ -101,6 +127,17 @@ public class DealerSiteTest {
     }
 
     @Test
+    public void testGetClientWithMaxBuys(){
+        dealerSite.addPurchase(purchase);
+        Purchase purchaseB = new Purchase(15000.00, motorcycle, employee, client);
+        dealerSite.addPurchase(purchaseB);
+        Client clientB = new Client(25, "Pawel", "Nowak");
+        Purchase purchaseC = new Purchase(15000.00, motorcycle, employee, clientB);
+        dealerSite.addPurchase(purchaseC);
+        assertEquals(client, dealerSite.getClientWithHighestPurchases());
+    }
+
+    @Test
     public void testGetBestPurchase(){
         Purchase purchaseB = new Purchase(15000.00, motorcycle, employee, client);
         dealerSite.addPurchase(purchase);
@@ -109,7 +146,7 @@ public class DealerSiteTest {
     }
 
     @After
-    public void tearDown() throws Exception{
+    public void tearDown(){
         dealerSite = null;
         client = null;
         employee = null;

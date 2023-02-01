@@ -7,9 +7,9 @@ public class DealerSite implements Stats{
     private ArrayList<Employee> employees;
 
     public DealerSite(){
-        this.vehicles = new HashMap<Vehicle, Double>();
-        this.purchases = new HashSet<Purchase>();
-        this.employees = new ArrayList<Employee>();
+        this.vehicles = new HashMap<>();
+        this.purchases = new HashSet<>();
+        this.employees = new ArrayList<>();
     }
 
     public DealerSite(HashMap<Vehicle, Double> vehicles, HashSet<Purchase> purchases, ArrayList<Employee> employees){
@@ -34,10 +34,22 @@ public class DealerSite implements Stats{
     public void addEmployee(Employee employee) {
         this.employees.add(employee);
     }
-    public void addVehicle(Vehicle vehicle, double price) {
+
+    public void addVehicle(Vehicle vehicle, double price) throws IllegalArgumentException {
+        if (price <= 0) throw new IllegalArgumentException();
         this.vehicles.put(vehicle, price);
     }
 
+    public void changeVehiclePrice(Vehicle vehicle, double newPrice){
+        if (newPrice <= 0) throw new IllegalArgumentException();
+        for (Map.Entry<Vehicle, Double> v : this.vehicles.entrySet()){
+            if (v.getKey() == vehicle){
+                v.setValue(newPrice);
+                return;
+            }
+        }
+        System.out.println("Vehicle was not found");
+    }
     public ArrayList<Purchase> getPurchasesInTimeRange(Date startDate, Date endDate) {
         ArrayList<Purchase> purchasesInTimeRange = new ArrayList<>();
         for (Purchase purchase : this.purchases) {
@@ -48,8 +60,18 @@ public class DealerSite implements Stats{
         return purchasesInTimeRange;
     }
 
+    public double getVehiclePrice(Vehicle vehicle){
+        for (Map.Entry<Vehicle, Double> v : this.vehicles.entrySet()){
+            if (v.getKey() == vehicle){
+                return v.getValue();
+            }
+        }
+        System.out.println("Vehicle was not found");
+        return 0;
+    }
+
     public ArrayList<Vehicle> getVehiclesBetweenPriceRange(double minPrice, double maxPrice){
-        ArrayList<Vehicle> vehiclesBetweenPriceRange = new ArrayList<Vehicle>();
+        ArrayList<Vehicle> vehiclesBetweenPriceRange = new ArrayList<>();
         for (Map.Entry<Vehicle, Double> vehicle : this.vehicles.entrySet()) {
             if (vehicle.getValue() >= minPrice && vehicle.getValue() <= maxPrice) {
                 vehiclesBetweenPriceRange.add(vehicle.getKey());
@@ -91,6 +113,20 @@ public class DealerSite implements Stats{
         return employeeWithMaxSales;
     }
 
+    public Client getClientWithHighestPurchases() {
+        double maxBuys = 0.0;
+        Client clientWithMaxBuys = null;
+        for (Purchase purchase : this.purchases) {
+            Client client = purchase.getBuyer();
+            double clientBuys = client.calculatePurchases();
+            if (clientBuys > maxBuys) {
+                maxBuys = clientBuys;
+                clientWithMaxBuys = client;
+            }
+        }
+        return clientWithMaxBuys;
+    }
+
     public Purchase getBestPurchase() {
         Purchase bestPurchase = null;
         for (Purchase purchase : this.purchases) {
@@ -100,4 +136,5 @@ public class DealerSite implements Stats{
         }
         return bestPurchase;
     }
+
 }

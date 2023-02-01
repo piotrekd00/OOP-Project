@@ -24,4 +24,13 @@ public class Motorcycle extends Vehicle{
     public void setTrunkCapacity(int trunkCapacity) {
         this.trunkCapacity = trunkCapacity;
     }
+
+    @Override
+    public String toString() {
+        String base = super.toString();
+        if (this.trunkCapacity > 0){
+            return base + "cc with " + this.trunkCapacity + "L trunk";
+        }
+        else return base + "cc";
+    }
 }

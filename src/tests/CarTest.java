@@ -3,6 +3,8 @@ import classes.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class CarTest {
     private Car car = new Car(2010, "BMW", "E92", 2.0, 'D', 4, 4, "Sedan");
 
@@ -24,4 +26,9 @@ public class CarTest {
         Assert.assertEquals(5, car.getSeats());
     }
 
+    @Test
+    public void testToString(){
+        String expected = "2010 BMW E92 2.0L Sedan 4 doors 4 seats";
+        assertEquals(expected, car.toString());
+    }
 }
